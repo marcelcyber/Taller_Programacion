@@ -38,7 +38,6 @@ void realizarReserva(int numHabitacion, char habitaciones[][3][40], char cliente
     printf("Ingrese su cedula:\n>>");
     scanf("%s", cedula);
 
-    // Buscar cliente
     int clienteIndex = -1;
     for (int i = 0; i < 5; i++) {
         if (strcmp(clientes[i][1], cedula) == 0) {
@@ -47,7 +46,6 @@ void realizarReserva(int numHabitacion, char habitaciones[][3][40], char cliente
         }
     }
 
-    // Si no se encuentra, se agrega
     if (clienteIndex == -1) {
         for (int i = 0; i < 5; i++) {
             if (strcmp(clientes[i][1], "") == 0) {
@@ -60,13 +58,12 @@ void realizarReserva(int numHabitacion, char habitaciones[][3][40], char cliente
         }
     }
 
-    // Realizar reserva
     for (int i = 0; i < 10; i++) {
         if (reservas[i][0] == -1) {
             reservas[i][0] = clienteIndex;
             reservas[i][1] = numHabitacion - 1;
-            reservas[i][2] = 0;  // No pagada
-            reservas[i][3] = 1;  // Reservada
+            reservas[i][2] = 0;  
+            reservas[i][3] = 1;  
             printf("Reserva realizada exitosamente!\n");
             return;
         }
@@ -79,7 +76,6 @@ void buscarReservaPorCedula(int *numReserva, char clientes[][2][40], int reserva
     printf("Ingrese su cedula:\n>>");
     scanf("%s", cedula);
 
-    // Buscar cliente
     int clienteIndex = -1;
     for (int i = 0; i < 5; i++) {
         if (strcmp(clientes[i][1], cedula) == 0) {
@@ -88,7 +84,6 @@ void buscarReservaPorCedula(int *numReserva, char clientes[][2][40], int reserva
         }
     }
 
-    // Buscar reserva
     for (int i = 0; i < 10; i++) {
         if (reservas[i][0] == clienteIndex && reservas[i][3] == 1) {
             *numReserva = i;
@@ -126,8 +121,8 @@ void pagarReserva(int numReserva, int reservas[][4], char habitaciones[][3][40],
 
     if (monto >= precios[habitacionIndex]) {
         printf("Pago realizado exitosamente!\n");
-        reservas[numReserva][2] = 1; // Indica que está pagada
-        reservas[numReserva][3] = 0; // Libera la reserva
+        reservas[numReserva][2] = 1; 
+        reservas[numReserva][3] = 0; 
     } else {
         printf("Monto insuficiente. Pago no realizado.\n");
     }
